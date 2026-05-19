@@ -1,6 +1,7 @@
 import logging
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker, DeclarativeBase
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy.ext.declarative import declarative_base
 from app.config import settings
 
 logger = logging.getLogger(__name__)
@@ -12,17 +13,15 @@ engine = create_engine(
 )
 
 # Session factory for generating isolated database connections
-session_local = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
-class Base(DeclarativeBase):
-    """Base class for SQLAlchemy data models"""
-    pass
+Base = declarative_base()
 
 def get_db():
     """
     Create database session per request then cleanup
     """
-    db = session_local()
+    db = SessionLocal()
     try:
         yield db
     except Exception as e:
