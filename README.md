@@ -11,7 +11,7 @@ A RESTful API built with FastAPI and SQLite for managing addresses with coordina
 ## Setup
 
 ```powershell
-git clone <your-repo-url>
+git clone https://github.com/kiandimaano/Address-Book-API
 cd address-book-api
 
 # Create and activate virtual environment
